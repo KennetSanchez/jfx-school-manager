@@ -1,1 +1,0 @@
-jfx-school-manager

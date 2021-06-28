@@ -1,0 +1,5 @@
+package model;
+
+public enum Courses {
+    PREESCOLAR, PRIMERO, SEGUNDO, TERCERO, CUARTO, QUINTO, SEXTO, SÉPTIMO, OCTAVO, NOVENO, DÉCIMO, ONCE, INCLUSIÓN;
+}

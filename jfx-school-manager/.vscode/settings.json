@@ -1,6 +1,5 @@
 {
     "java.project.referencedLibraries": [
-        "C:\\Program Files\\Java\\jdk-16.0.1\\lib\\javafx-sdk-11.0.2\\lib",
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.base.jar",
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.controls.jar",
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.fxml.jar",
@@ -8,6 +7,6 @@
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.media.jar",
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.swing.jar",
         "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx.web.jar",
-        "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx-swt.jar"
+        "c:\\Program Files\\Java\\javafx-sdk-16\\lib\\javafx-swt.jar",
     ]
 }

@@ -12,5 +12,6 @@ This project has been developed in visual studio code for windows with jdk versi
 
 ## Extra information
 
-To see others interesting projects, or contact the developer, click[here](https://github.com/KennetSanchez).
-All the icons used in this project have been taken from [here](https://www.freeiconspng.com)
+To see others interesting projects, or contact the developer, click[here](https://github.com/KennetSanchez)
+
+All the icons used in this project have been taken from [here](https://www.freeiconspng.com) and [here](https://www.freepik.com)

@@ -21,4 +21,9 @@ public class Manager {
 
         return founded;
     }
+
+    public void addStudent(String name, String course, String hasRelatives, long cost, String terapy){
+        StudentBasic newStudent = new StudentBasic(name, course, hasRelatives, cost, terapy);
+        allStudents.add(newStudent);
+    }
 }

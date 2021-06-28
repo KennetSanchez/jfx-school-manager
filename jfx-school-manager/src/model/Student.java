@@ -8,22 +8,17 @@ public abstract class Student {
     long cost;
     String name;
     String course;
+    String terapy;
     Calendar payDate;
 
     ArrayList<String> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(boolean pHasRelatives, long pCost, String pName, String pCourse, Calendar pPayDate){
-        if(pHasRelatives){
-            hasRelatives = "Sí";
-        }else{
-            hasRelatives = "No";
-        }
-
+    public Student(String pName, String pCourse, String pHasRelatives, long pCost, String pTerapy){
         cost = pCost;
         name = pName;
         course = pCourse;
-        payDate = pPayDate;
+        terapy = pTerapy;
 
         extraSubjects = new ArrayList<String>();
         extraSubjectCost = new ArrayList<Long>();
