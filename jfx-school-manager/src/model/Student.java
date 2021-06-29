@@ -1,24 +1,37 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public abstract class Student {
-    String hasRelatives;
-    long cost;
+
+    //This variables are for parsing booleans into spanish Strings.
+   // private final static String AFFIRMATION = "Sí";
+    private final static String NEGATION = "No";
+    
+    String hasRelatives;  
     String name;
     String course;
     String terapy;
-    Calendar payDate;
+    String id;
+    long cost;
+    String ows;
+    String extraAsignatures =  "---------";
 
+    ArrayList<String> asignatures;
+
+    //Not implemented yet.
     ArrayList<String> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(String pName, String pCourse, String pHasRelatives, long pCost, String pTerapy){
+    public Student(String pName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures){
         cost = pCost;
         name = pName;
         course = pCourse;
         terapy = pTerapy;
+        id = pId;
+        ows = NEGATION;
+        hasRelatives = pHasRelatives;
+        asignatures = pAsignatures;
 
         extraSubjects = new ArrayList<String>();
         extraSubjectCost = new ArrayList<Long>();
@@ -82,11 +95,47 @@ public abstract class Student {
         this.course = course;
     }
 
-    public Calendar getPayDate() {
-        return this.payDate;
+    public String getId(){
+        return id;
     }
 
-    public void setPayDate(Calendar payDate) {
-        this.payDate = payDate;
+    public void setId(String newId){
+        id = newId;
+    }
+
+    public String getOws(){
+        return ows;
+    }
+
+    public void setOws(String newState){
+        ows = newState;
+    }
+
+    public String getExtrasString(){
+        String msg = "";
+        if(extraSubjects.size() != 0){
+            for(int i = 0; i < extraSubjects.size() ; i++){
+                msg += extraSubjects.get(i);
+            }
+            extraAsignatures = msg;
+        }
+        return extraAsignatures;
+    }
+
+    public String getAsignaturesString(){
+        String msg = "";
+        int index = 0;
+        
+        while(index < asignatures.size()){
+            if(index <asignatures.size()-1){
+                msg += asignatures.get(index) + ", ";
+            }else{
+                msg += asignatures.get(index);
+            }
+            index++;
+        }
+
+
+        return msg;
     }
 }

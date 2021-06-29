@@ -87,7 +87,7 @@
           <TableColumn fx:id="ADDSTUDENTtcChoosedSignatures" prefWidth="182.0" text="Materias elegidas" />
         </columns>
       </TableView>
-      <TableView fx:id="ADDSTUDENTtvAvaibleAsignatures" layoutX="322.0" layoutY="536.0" prefHeight="156.0" prefWidth="183.0">
+      <TableView fx:id="ADDSTUDENTtvAvaibleAsignatures" layoutX="322.0" layoutY="536.0" onMouseClicked="#ADDSTUDENTaddAsignature" prefHeight="156.0" prefWidth="183.0">
          <columns>
             <TableColumn fx:id="ADDSTUDENTtcAvaibleAsignatures" prefWidth="182.0" text="Materias disponibles" />
          </columns>

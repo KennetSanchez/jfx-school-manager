@@ -9,6 +9,26 @@ public class Manager {
         allStudents = new ArrayList<Student>();
     }
 
+    public ArrayList<Student> searchStudent(String name){
+        ArrayList<Student> founded = new ArrayList<Student>();
+        
+        for(int i = 0 ; i < allStudents.size() ; i++){
+            if(allStudents.get(i).getName().equals(name)){
+                Student studentFounded = allStudents.get(i);
+                founded.add(studentFounded);
+            }
+        }
+
+        return founded;
+    }
+
+    public void addStudent(String name, String course, String hasRelatives, long cost, String terapy, String id, ArrayList<String> asignatures){
+        StudentBasic newStudent = new StudentBasic(name, course, hasRelatives, cost, terapy, id, asignatures);
+        allStudents.add(newStudent);
+    }
+
+    //-------------------------------------------------- GETTERS FOR UI --------------------------------------------------
+    
     public ArrayList<Courses> getCourses(){
         ArrayList<Courses> avaibleCourses = new ArrayList<Courses>();
         
@@ -28,21 +48,8 @@ public class Manager {
 
         return avaibleAsignatures;
     }
-    public ArrayList<Student> searchStudent(String name){
-        ArrayList<Student> founded = new ArrayList<Student>();
-        
-        for(int i = 0 ; i < allStudents.size() ; i++){
-            if(allStudents.get(i).getName().equals(name)){
-                Student studentFounded = allStudents.get(i);
-                founded.add(studentFounded);
-            }
-        }
 
-        return founded;
-    }
-
-    public void addStudent(String name, String course, String hasRelatives, long cost, String terapy){
-        StudentBasic newStudent = new StudentBasic(name, course, hasRelatives, cost, terapy);
-        allStudents.add(newStudent);
+    public ArrayList<Student> getStudents(){
+        return allStudents;
     }
 }

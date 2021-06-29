@@ -2,6 +2,8 @@ package ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Courses;
 import model.ExtraAsignatures;
@@ -33,6 +36,8 @@ public class ManagerGUI {
     Stage mainStage;
     Stage popUpStage;
     Manager manager;
+    
+    Set<ExtraAsignatures> choosedAsignatures = new HashSet<ExtraAsignatures>();
     
     public ManagerGUI() throws IOException{
         manager = new Manager();
@@ -71,13 +76,13 @@ public class ManagerGUI {
     private TableColumn<Student, String> LISTALLSTUDENTStcFullName;
 
     @FXML
+    private TableColumn<Student, String> LISTALLSTUDENTStcId;
+
+    @FXML
     private TableColumn<Student, String> LISTALLSTUDENTStcCourse;
 
     @FXML
     private TableColumn<Student, Long> LISTALLSTUDENTStcCost;
-
-    @FXML
-    private TableColumn<Student, String> LISTALLSTUDENTStcPayDate;
 
     @FXML
     private TableColumn<Student, String> LISTALLSTUDENTStcExtraSubjects;
@@ -159,6 +164,7 @@ public class ManagerGUI {
         String id = ADDSTUDENTtxtId.getText();
         String course = ADDSTUDENTcbCourse.getSelectionModel().getSelectedItem()+"";
 
+        String fullName = names + " " + lastNames;
         String hasRelatives = "";
         if(ADDSTUDENTcbHasRelatives.isSelected()){
             hasRelatives = AFFIRMATION;
@@ -186,9 +192,16 @@ public class ManagerGUI {
         }
 
         if(completed){
-            String msg = names + lastNames + " con identificación " + id + "ha sido registrado(a) exitosamente en "+ course;
+            String msg = fullName + " con identificación " + id + " ha sido registrado(a) exitosamente en "+ course;
             long cost = 0;
-            manager.addStudent(names, course, hasRelatives, cost, terapy);
+            
+            ArrayList<String> asignaturesArrayString = new ArrayList<String>();
+
+             for(ExtraAsignatures asignature: choosedAsignatures){
+                asignaturesArrayString.add(asignature + "");
+            }
+
+            manager.addStudent(fullName, course, hasRelatives, cost, terapy, id, asignaturesArrayString);
 
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("¡Hecho!");
@@ -211,6 +224,15 @@ public class ManagerGUI {
     void ADDSTUDENTcancel(ActionEvent event) throws IOException{
         showMainMenu();
     }
+
+    @FXML
+    void ADDSTUDENTaddAsignature(MouseEvent event) {
+        if(event.getClickCount() == 2){
+            ExtraAsignatures choosed = ADDSTUDENTtvAvaibleAsignatures.getSelectionModel().getSelectedItem();
+            choosedAsignatures.add(choosed);
+            refreshAddStudentChoosedAsignatures();
+        }
+    }
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
 
     private void showSearchedStudent(ArrayList<Student> students) throws IOException{
@@ -232,7 +254,6 @@ public class ManagerGUI {
         LISTALLSTUDENTStcHasRelatives.setCellValueFactory(new PropertyValueFactory<Student, String>("hasRelatives"));
         LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
         LISTALLSTUDENTStcExtraSubjects.setCellValueFactory(new PropertyValueFactory<Student, String>("extraSubjects"));
-        LISTALLSTUDENTStcPayDate.setCellValueFactory(new PropertyValueFactory<Student, String>("payDate"));
 
        }else{
         Alert alert = new Alert(AlertType.ERROR);
@@ -259,6 +280,17 @@ public class ManagerGUI {
         loader.setController(this); 
         Parent root = loader.load();
         Scene scene = new Scene(root);
+
+        ObservableList<Student> students = FXCollections.observableArrayList(manager.getStudents());
+        LISTALLSTUDENTStvStudents.setItems(students);
+        LISTALLSTUDENTStcFullName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+        LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
+        LISTALLSTUDENTStcCost.setCellValueFactory(new PropertyValueFactory<Student, Long>("cost"));
+        LISTALLSTUDENTStcId.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
+        LISTALLSTUDENTStcHasRelatives.setCellValueFactory(new PropertyValueFactory<Student, String>("hasRelatives"));
+        LISTALLSTUDENTStcOwe.setCellValueFactory(new PropertyValueFactory<Student, String>("ows"));
+        LISTALLSTUDENTStcExtraSubjects.setCellValueFactory(new PropertyValueFactory<Student, String>("asignaturesString"));
+
         popUpStage.setScene(scene);
         mainStage.hide();
         popUpStage.show();
@@ -284,5 +316,25 @@ public class ManagerGUI {
         popUpStage.setScene(scene);
         mainStage.hide();
         popUpStage.show();
+    }
+
+    private void refreshAddStudentChoosedAsignatures(){
+        ArrayList<ExtraAsignatures> asignaturesArray = new ArrayList<ExtraAsignatures>();
+
+        for(ExtraAsignatures asignature: choosedAsignatures){
+            asignaturesArray.add(asignature);
+        }
+        
+        if(asignaturesArray.size() != 0){
+            ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
+            ADDSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
+            ADDSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
+        }else{
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Ningun elemento fue elegido");
+            alert.setContentText("Intente nuevamente");
+            alert.show();
+        }
     }
 }

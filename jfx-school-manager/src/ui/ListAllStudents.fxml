@@ -9,17 +9,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #236E7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: #236E7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView fx:id="LISTALLSTUDENTStvStudents" layoutX="14.0" layoutY="57.0" prefHeight="686.0" prefWidth="1033.0">
         <columns>
-          <TableColumn fx:id="LISTALLSTUDENTStcFullName" prefWidth="150.0" text="Nombre completo" />
-          <TableColumn fx:id="LISTALLSTUDENTStcCourse" minWidth="0.0" prefWidth="151.0" text="Grado" />
-            <TableColumn fx:id="LISTALLSTUDENTStcCost" minWidth="0.0" prefWidth="151.0" text="Valor" />
-            <TableColumn fx:id="LISTALLSTUDENTStcPayDate" minWidth="0.0" prefWidth="121.0" text="Fecha de pago" />
-            <TableColumn fx:id="LISTALLSTUDENTStcExtraSubjects" minWidth="0.0" prefWidth="250.0" text="Materias extra" />
-            <TableColumn fx:id="LISTALLSTUDENTStcHasRelatives" minWidth="0.0" prefWidth="100.0" text="Tiene familiares" />
-            <TableColumn fx:id="LISTALLSTUDENTStcOwe" minWidth="0.0" prefWidth="109.0" text="Debe" />
+          <TableColumn fx:id="LISTALLSTUDENTStcFullName" prefWidth="195.0" text="Nombre completo" />
+            <TableColumn fx:id="LISTALLSTUDENTStcId" minWidth="0.0" prefWidth="110.0" text="Identificación" />
+          <TableColumn fx:id="LISTALLSTUDENTStcCourse" minWidth="0.0" prefWidth="111.0" text="Grado" />
+            <TableColumn fx:id="LISTALLSTUDENTStcCost" minWidth="0.0" prefWidth="119.0" text="Valor" />
+            <TableColumn fx:id="LISTALLSTUDENTStcExtraSubjects" minWidth="0.0" prefWidth="320.0" text="Materias extra" />
+            <TableColumn fx:id="LISTALLSTUDENTStcHasRelatives" minWidth="0.0" prefWidth="103.0" text="Tiene familiares" />
+            <TableColumn fx:id="LISTALLSTUDENTStcOwe" minWidth="0.0" prefWidth="74.0" text="Debe" />
         </columns>
       </TableView>
       <Button layoutX="1122.0" layoutY="219.0" mnemonicParsing="false" onAction="#LISTALLSTUDENTSSort" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Ordenar" textFill="WHITE">
