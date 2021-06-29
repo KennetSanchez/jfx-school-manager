@@ -9,6 +9,25 @@ public class Manager {
         allStudents = new ArrayList<Student>();
     }
 
+    public ArrayList<Courses> getCourses(){
+        ArrayList<Courses> avaibleCourses = new ArrayList<Courses>();
+        
+        for(Courses c : Courses.values()){
+            avaibleCourses.add(c);
+        }
+
+        return avaibleCourses;
+    }
+
+    public ArrayList<ExtraAsignatures> getAsignatures(){
+        ArrayList<ExtraAsignatures> avaibleAsignatures = new ArrayList<ExtraAsignatures>();
+        
+        for(ExtraAsignatures extra : ExtraAsignatures.values()){
+            avaibleAsignatures.add(extra);
+        }
+
+        return avaibleAsignatures;
+    }
     public ArrayList<Student> searchStudent(String name){
         ArrayList<Student> founded = new ArrayList<Student>();
         

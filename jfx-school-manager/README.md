@@ -10,8 +10,13 @@ To customize the institutional icon, it is necessary to replace the "institution
 
 This project has been developed in visual studio code for windows with jdk version 16.0.1 and javafx version 16
 
-## Extra information
+## About the developer
 
-To see others interesting projects, or contact the developer, click[here](https://github.com/KennetSanchez)
+To see others interesting projects, or contact the developer, [click me](https://github.com/KennetSanchez)
 
-All the icons used in this project have been taken from [here](https://www.freeiconspng.com) and [here](https://www.freepik.com)
+## Image banks used
+
+All the icons used in this project have been taken from:
+* [Free icons png](https://www.freeiconspng.com)
+* [Free pik](https://www.freepik.com)
+* [The noun project](https://thenounproject.com)

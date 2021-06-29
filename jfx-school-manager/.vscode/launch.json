@@ -1,26 +1,19 @@
-{
-    "version": "0.2.0",
+{ 
+    "version": "0.2.0", 
     "configurations": [
-        {
-            "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "mainClass": "ui.Main",
-            "projectName": "jfx-school-manager_7daa359d"
-        },
         {
             "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
         },
         {
             "type": "java",
-            "name": "Debug (Launch) - ui.Main<jfx-school-manager_7daa359d>",
+            "name": "Debug (Launch)-MainLaunch Main<jfx-school-manager_7daa359d>",
             "request": "launch",
-            "mainClass": "C:/Users/Kennet/OneDrive - Universidad Icesi (@icesi.edu.co)/Universidad/Programas extra/jfx-manager-restauran/src/ui/Main",
-            "projectName": "jfx-school-manager_7daa359d",
-            "vmArgs": "--module-path C:/Program Files/Java/javafx-sdk-16/lib --add-modules javafx.base, javafx.controls, javafx.fxml, javafx.graphics, javafx.media, javafx.swing, javafx.web, javafx.swt"
+            "vmArgs": "--module-path C:/Users/Kennet/Downloads/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "ui.Main",
+            "projectName": "jfx-school-manager_7daa359d"
         }
-    ]
+    ] 
 }

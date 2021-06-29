@@ -18,7 +18,7 @@
          <children>
             <ImageView blendMode="SRC_ATOP" fitHeight="507.0" fitWidth="614.0" layoutX="88.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../jfx-manager-restaurant/icons/students.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-manager-restaurant/icons/students.png" />
                </image>
             </ImageView>
          </children>
@@ -48,12 +48,12 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="494.0" text="Materias adicionales:" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="494.0" text="Materias representativas:" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="426.0" text="¿Tendrá terapia?" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="400.0" text="¿Es de inclusión?" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -72,12 +72,12 @@
             <Font name="Times New Roman" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="ADDSTUDENTcbHasTerapy" layoutX="294.0" layoutY="429.0" mnemonicParsing="false" text="Sí" textFill="WHITE">
+      <CheckBox fx:id="ADDSTUDENTcbHasTerapy" layoutX="290.0" layoutY="404.0" mnemonicParsing="false" text="Sí" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="ADDSTUDENTcbHasnotTerapy" layoutX="396.0" layoutY="429.0" mnemonicParsing="false" text="No" textFill="WHITE">
+      <CheckBox fx:id="ADDSTUDENTcbHasnotTerapy" layoutX="396.0" layoutY="404.0" mnemonicParsing="false" text="No" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
@@ -92,14 +92,14 @@
             <TableColumn fx:id="ADDSTUDENTtcAvaibleAsignatures" prefWidth="182.0" text="Materias disponibles" />
          </columns>
       </TableView>
-      <Button contentDisplay="RIGHT" defaultButton="true" layoutX="234.0" layoutY="731.0" mnemonicParsing="false" onAction="#ADDSTUDENTadd" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 40;" text="Agreagar" textFill="WHITE">
+      <Button contentDisplay="RIGHT" defaultButton="true" layoutX="353.0" layoutY="725.0" mnemonicParsing="false" onAction="#ADDSTUDENTadd" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 40;" text="Agregar" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/done.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/done.png" />
                </image>
             </ImageView>
          </graphic>
@@ -109,5 +109,17 @@
             <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
+      <Button contentDisplay="RIGHT" defaultButton="true" layoutX="74.0" layoutY="725.0" mnemonicParsing="false" onAction="#ADDSTUDENTcancel" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 40;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/cancel.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </Pane>

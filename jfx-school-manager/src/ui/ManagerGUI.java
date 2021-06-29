@@ -34,18 +34,18 @@ public class ManagerGUI {
     Stage popUpStage;
     Manager manager;
     
-    public ManagerGUI(){
+    public ManagerGUI() throws IOException{
         manager = new Manager();
-        try {
-            showMainMenu();
-        } catch (IOException e) {
-        }
+        
+        mainStage = new Stage();
+        popUpStage = new Stage();
+        showMainMenu();
     }
 
     //----------------------------------------------------------------- MAIN MENU -----------------------------------------------------------------
     @FXML
-    void MAINMENUAddStudent(ActionEvent event) {
-
+    void MAINMENUAddStudent(ActionEvent event)throws IOException {
+        showAddStudent();
     }
 
     @FXML
@@ -54,13 +54,13 @@ public class ManagerGUI {
     }
 
     @FXML
-    void MAINMENUEditStuednt(ActionEvent event) {
-
+    void MAINMENUEditStuednt(ActionEvent event) throws IOException{
+        
     }
 
     @FXML
     void RemoveStudent(ActionEvent event) {
-
+        
     }
     //----------------------------------------------------------------- LIST ALL STUDENTS -----------------------------------------------------------------
     
@@ -207,6 +207,10 @@ public class ManagerGUI {
         
     }
 
+    @FXML
+    void ADDSTUDENTcancel(ActionEvent event) throws IOException{
+        showMainMenu();
+    }
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
 
     private void showSearchedStudent(ArrayList<Student> students) throws IOException{
@@ -241,17 +245,18 @@ public class ManagerGUI {
     }
 
     private void showMainMenu() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-        loader.setController(this);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        mainStage.setScene(scene);
-        popUpStage.hide();
-        mainStage.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml")); 
+        loader.setController(this); 
+        Parent root = loader.load(); 
+        Scene scene = new Scene(root); 
+        mainStage.setScene(scene); 
+        mainStage.show(); 
+        popUpStage.hide();      
     }
 
     private void showStudentsList() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ListAllStudents.fxml"));
+        loader.setController(this); 
         Parent root = loader.load();
         Scene scene = new Scene(root);
         popUpStage.setScene(scene);
@@ -261,7 +266,20 @@ public class ManagerGUI {
 
     private void showAddStudent() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddStudent.fxml"));
+        loader.setController(this); 
         Parent root = loader.load();
+        
+        ArrayList<Courses> courses = manager.getCourses();
+        ArrayList<ExtraAsignatures> asignatures = manager.getAsignatures();
+
+        ObservableList<Courses> coursesOb = FXCollections.observableArrayList(courses);
+        ObservableList<ExtraAsignatures> extrasOb = FXCollections.observableArrayList(asignatures);
+        
+       
+        ADDSTUDENTcbCourse.setItems(coursesOb);
+        ADDSTUDENTtvAvaibleAsignatures.setItems(extrasOb);
+        ADDSTUDENTtcAvaibleAsignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
+
         Scene scene = new Scene(root);
         popUpStage.setScene(scene);
         mainStage.hide();
