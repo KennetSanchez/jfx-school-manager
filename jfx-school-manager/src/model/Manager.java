@@ -9,11 +9,11 @@ public class Manager {
         allStudents = new ArrayList<Student>();
     }
 
-    public ArrayList<Student> searchStudent(String name){
+    public ArrayList<Student> searchStudent(String id){
         ArrayList<Student> founded = new ArrayList<Student>();
         
         for(int i = 0 ; i < allStudents.size() ; i++){
-            if(allStudents.get(i).getName().equals(name)){
+            if(allStudents.get(i).getId().equals(id)){
                 Student studentFounded = allStudents.get(i);
                 founded.add(studentFounded);
             }

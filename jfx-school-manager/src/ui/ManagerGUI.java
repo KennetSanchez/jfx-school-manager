@@ -69,6 +69,8 @@ public class ManagerGUI {
     }
     //----------------------------------------------------------------- LIST ALL STUDENTS -----------------------------------------------------------------
     
+    Student choosedStudent;
+
     @FXML
     private TableView<Student> LISTALLSTUDENTStvStudents;
 
@@ -94,22 +96,45 @@ public class ManagerGUI {
     private TableColumn<Student, String> LISTALLSTUDENTStcOwe;
 
     @FXML
-    private ComboBox<String> LISTALLSTUDENTStypeSort;
+    private TextField LISTALLSTUDENTSidSearched;
 
     @FXML
-    private TextField LISTALLSTUDENTSNameSearched;
+    void LISTALLSTUDENTSchoosingStudent(MouseEvent event) {
+        if(event.getClickCount() == 2){
+            choosedStudent = LISTALLSTUDENTStvStudents.getSelectionModel().getSelectedItem();
+        }
+    }
+    
+    @FXML
+    void LISTALLSTUDENTSPaid(ActionEvent event) {
+        if(choosedStudent != null){
+            choosedStudent.setOws(NEGATION);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Hecho");
+            alert.setHeaderText("El pago del estudiante fue registrado");
+            alert.setContentText("Haga click en \"aceptar\" para continuar");
+            alert.show();
+            choosedStudent = null;
+        }else{
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Ningun estudiante fue seleccionado");
+            alert.setContentText("Eliga un estudiante e intente nuevamente");
+            alert.show();
+        }
+    }
     
     @FXML
     void LISTALLSTUDENTSSearch(ActionEvent event) throws IOException {
-        String studentName = LISTALLSTUDENTSNameSearched.getText();
-        if(studentName.equals("")){
+        String studentId = LISTALLSTUDENTSidSearched.getText();
+        if(studentId.equals("")){
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText("Campo vacío");
             alert.setContentText("Escribe el nombre e intenta nuevamente");
             alert.show();
         }else{
-            ArrayList<Student> foundedStudents  = manager.searchStudent(studentName);
+            ArrayList<Student> foundedStudents  = manager.searchStudent(studentId);
             showSearchedStudent(foundedStudents);
         }
     }
