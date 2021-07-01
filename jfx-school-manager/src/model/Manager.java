@@ -22,8 +22,8 @@ public class Manager {
         return founded;
     }
 
-    public void addStudent(String name, String course, String hasRelatives, long cost, String terapy, String id, ArrayList<String> asignatures){
-        StudentBasic newStudent = new StudentBasic(name, course, hasRelatives, cost, terapy, id, asignatures);
+    public void addStudent(String name, String lastName, String course, String hasRelatives, long cost, String terapy, String id, ArrayList<String> asignatures){
+        StudentBasic newStudent = new StudentBasic(name, lastName, course, hasRelatives, cost, terapy, id, asignatures);
         allStudents.add(newStudent);
     }
 

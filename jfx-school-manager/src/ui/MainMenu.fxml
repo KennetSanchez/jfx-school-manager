@@ -12,14 +12,14 @@
       <Pane blendMode="SOFT_LIGHT" layoutX="697.0" prefHeight="800.0" prefWidth="26.0" style="-fx-background-color: #a7d2db;" />
       <Pane layoutX="716.0" prefHeight="800.0" prefWidth="587.0" style="-fx-background-color: #a7d2db;">
          <children>
-            <Button layoutX="248.0" layoutY="238.0" mnemonicParsing="false" onAction="#MAINMENUEditStuednt" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Actualizar estudiante" textFill="WHITE">
+            <Button layoutX="248.0" layoutY="238.0" mnemonicParsing="false" onAction="#MAINMENUEditStudent" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Actualizar estudiante" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Button>
             <Button layoutX="234.0" layoutY="562.0" mnemonicParsing="false" onAction="#MAINMENUAllStudentsList" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Listado de estudiantes" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Button>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="241.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
@@ -34,14 +34,14 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="194.0" layoutY="251.0" mnemonicParsing="false" onAction="#MAINMENUAddStudent" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Registrar estudiante" textFill="WHITE">
+      <Button layoutX="186.0" layoutY="251.0" mnemonicParsing="false" onAction="#MAINMENUAddStudent" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Registrar estudiante" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="200.0" layoutY="575.0" mnemonicParsing="false" onAction="#RemoveStudent" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Remover estudiante" textFill="WHITE">
+      <Button layoutX="186.0" layoutY="576.0" mnemonicParsing="false" onAction="#RemoveStudent" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Remover estudiante" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="182.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">

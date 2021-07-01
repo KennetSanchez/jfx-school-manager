@@ -26,6 +26,7 @@ import model.Courses;
 import model.ExtraAsignatures;
 import model.Manager;
 import model.Student;
+import model.StudentBasic;
 
 public class ManagerGUI {
     
@@ -37,11 +38,18 @@ public class ManagerGUI {
     Stage popUpStage;
     Manager manager;
     
+    ArrayList<String> testAsignatures = new ArrayList<String>();
+    
+    
+
+    Student testStudent;
+    
     Set<ExtraAsignatures> choosedAsignatures = new HashSet<ExtraAsignatures>();
     
     public ManagerGUI() throws IOException{
         manager = new Manager();
-        
+        testAsignatures.add("DANZA");
+         testStudent = new StudentBasic("Jhon", "Doe", "-", "-", 0L, NEGATION, "000000", testAsignatures);
         mainStage = new Stage();
         popUpStage = new Stage();
         showMainMenu();
@@ -59,8 +67,8 @@ public class ManagerGUI {
     }
 
     @FXML
-    void MAINMENUEditStuednt(ActionEvent event) throws IOException{
-        
+    void MAINMENUEditStudent(ActionEvent event) throws IOException{
+        showEditStudent(testStudent);
     }
 
     @FXML
@@ -140,8 +148,8 @@ public class ManagerGUI {
     }
 
     @FXML
-    void LISTALLSTUDENTSSort(ActionEvent event) {
-
+    void LISTALLSTUDENTSback(ActionEvent event) throws IOException{
+        showMainMenu();
     }
 
     //-----------------------------------------------------------------  ADD STUDENT -----------------------------------------------------------------
@@ -183,7 +191,7 @@ public class ManagerGUI {
     private TableColumn<ExtraAsignatures, String> ADDSTUDENTtcAvaibleAsignatures;
 
     @FXML
-    void ADDSTUDENTadd(ActionEvent event) {
+    void ADDSTUDENTadd(ActionEvent event) throws IOException {
         String names = ADDSTUDENTtxtName.getText();
         String lastNames = ADDSTUDENTtxtLastNames.getText();
         String id = ADDSTUDENTtxtId.getText();
@@ -226,13 +234,14 @@ public class ManagerGUI {
                 asignaturesArrayString.add(asignature + "");
             }
 
-            manager.addStudent(fullName, course, hasRelatives, cost, terapy, id, asignaturesArrayString);
+            manager.addStudent(names, lastNames, course, hasRelatives, cost, terapy, id, asignaturesArrayString);
 
-            Alert alert = new Alert(AlertType.CONFIRMATION);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("¡Hecho!");
             alert.setHeaderText("Matriculado exitosamente");
             alert.setContentText(msg);
-            alert.show();
+            alert.showAndWait();
+            showAddStudent();
         }else{
             String msg = "Revisa los campos obligatorios y vuelve a intentar";
             
@@ -257,6 +266,110 @@ public class ManagerGUI {
             choosedAsignatures.add(choosed);
             refreshAddStudentChoosedAsignatures();
         }
+    }
+
+
+    //-----------------------------------------------------------------  SEARCHED STUDENT -----------------------------------------------------------------
+
+    @FXML
+    private TableView<Student> SEARCHEDSTUDENTtv;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcName;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcId;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcCourse;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcExtra;
+
+    @FXML
+    private TableColumn<Student, Long> SEARCHEDSTUDENTtcCost;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcOwe;
+
+    @FXML
+    private TableColumn<Student, String> SEARCHEDSTUDENTtcInclusion;
+
+    @FXML
+    void SEARCHEDSTUDENTPaid(ActionEvent event) {
+
+    }
+
+    @FXML
+    void SEARCHEDSTUDENTPdidnotpay(ActionEvent event) {
+
+    }
+
+    @FXML
+    void SEARCHEDSTUDENTback(ActionEvent event) throws IOException {
+        showMainMenu();
+    }
+
+    //-----------------------------------------------------------------  EDIT STUDENT -----------------------------------------------------------------
+    
+    Student modifiedStudent;
+    
+    @FXML
+    private TextField EDITSTUDENTtxtName;
+
+    @FXML
+    private TextField EDITSTUDENTtxtLastNames;
+
+    @FXML
+    private ComboBox<Courses> EDITSTUDENTcbCourse;
+
+    @FXML
+    private TextField EDITSTUDENTtxtId;
+
+    @FXML
+    private CheckBox EDITSTUDENTcbHasRelatives;
+
+    @FXML
+    private CheckBox EDITSTUDENTcbHasnotRelatives;
+
+    @FXML
+    private CheckBox EDITSTUDENTcbHasTerapy;
+
+    @FXML
+    private CheckBox EDITSTUDENTcbHasnotTerapy;
+
+    //This should be working with ExtraAsignatures
+    @FXML
+    private TableView<String> EDITSTUDENTtvChoosedSignatures;
+
+    @FXML
+    private TableColumn<String, String> EDITSTUDENTtcChoosedSignatures;
+
+    
+    @FXML
+    private TableView<ExtraAsignatures> EDITSTUDENTtvAvaibleAsignatures;
+
+    @FXML
+    private TableColumn<ExtraAsignatures, String> EDITSTUDENTtcAvaibleAsignatures;
+
+    @FXML
+    void EDITSTUDENTaddAsignature(MouseEvent event) {
+
+    }
+
+    @FXML
+    void EDITSTUDENTback(ActionEvent event) {
+
+    }
+
+    @FXML
+    void EDITSTUDENTedit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void EDITSTUDENTremoveAsignature(MouseEvent event) {
+
     }
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
 
@@ -361,5 +474,48 @@ public class ManagerGUI {
             alert.setContentText("Intente nuevamente");
             alert.show();
         }
+    }
+
+    private void showEditStudent(Student selectedStudent) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EditStudent.fxml"));
+        loader.setController(this); 
+        Parent root = loader.load();
+        
+        ArrayList<Courses> courses = manager.getCourses();
+        ArrayList<ExtraAsignatures> asignatures = manager.getAsignatures();
+
+        ObservableList<Courses> coursesOb = FXCollections.observableArrayList(courses);
+        ObservableList<ExtraAsignatures> extrasOb = FXCollections.observableArrayList(asignatures);
+              
+        EDITSTUDENTcbCourse.setItems(coursesOb);
+        EDITSTUDENTtvAvaibleAsignatures.setItems(extrasOb);
+        EDITSTUDENTtcAvaibleAsignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
+
+        Scene scene = new Scene(root);
+        popUpStage.setScene(scene);
+        mainStage.hide();
+
+        EDITSTUDENTtxtName.setText(selectedStudent.getName());
+        EDITSTUDENTtxtLastNames.setText(selectedStudent.getLastName());
+        EDITSTUDENTtxtId.setText(selectedStudent.getId());
+        //Just for testing purposes.
+        EDITSTUDENTcbCourse.setValue(Courses.ONCE);
+        
+        if(selectedStudent.getHasRelatives().equals(AFFIRMATION)){
+            EDITSTUDENTcbHasRelatives.setSelected(true);
+        }else{
+            EDITSTUDENTcbHasnotRelatives.setSelected(true);
+        }
+
+        if(selectedStudent.getHasTerapy().equals(AFFIRMATION)){
+            EDITSTUDENTcbHasTerapy.setSelected(true);
+        }else{
+            EDITSTUDENTcbHasnotTerapy.setSelected(true);
+        }
+
+        EDITSTUDENTtvChoosedSignatures.setItems(FXCollections.observableArrayList(selectedStudent.getAsignaturesString()));
+        EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<String, String>("name"));
+
+        popUpStage.show();
     }
 }

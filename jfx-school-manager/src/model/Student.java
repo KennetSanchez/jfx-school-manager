@@ -9,7 +9,7 @@ public abstract class Student {
     private final static String NEGATION = "No";
     
     String hasRelatives;  
-    String name;
+    String name, lastName, fullName;
     String course;
     String terapy;
     String id;
@@ -20,12 +20,14 @@ public abstract class Student {
     ArrayList<String> asignatures;
 
     //Not implemented yet.
-    ArrayList<String> extraSubjects;
+    ArrayList<ExtraAsignatures> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(String pName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures){
+    public Student(String pName, String pLastName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures){
         cost = pCost;
         name = pName;
+        lastName = pLastName;
+        fullName = pName + " " + pLastName;
         course = pCourse;
         terapy = pTerapy;
         id = pId;
@@ -33,11 +35,11 @@ public abstract class Student {
         hasRelatives = pHasRelatives;
         asignatures = pAsignatures;
 
-        extraSubjects = new ArrayList<String>();
+        extraSubjects = new ArrayList<ExtraAsignatures>();
         extraSubjectCost = new ArrayList<Long>();
     }
 
-    public void addSubject(String newSubject){
+    public void addSubject(ExtraAsignatures newSubject){
         extraSubjects.add(newSubject);
     }
 
@@ -45,7 +47,7 @@ public abstract class Student {
         extraSubjectCost.add(newCost);
     }
 
-    public void removeSubject(String subjectToRemove){
+    public void removeSubject(ExtraAsignatures subjectToRemove){
         extraSubjects.remove(subjectToRemove);
     }
 
@@ -53,7 +55,7 @@ public abstract class Student {
         extraSubjectCost.remove(newCost);
     }
 
-    public ArrayList<String> getSubject(){
+    public ArrayList<ExtraAsignatures> getSubject(){
         return extraSubjects;
     }
 
@@ -134,8 +136,14 @@ public abstract class Student {
             }
             index++;
         }
-
-
         return msg;
+    }
+
+    public String getHasTerapy(){
+        return terapy;
+    }
+
+    public String getLastName(){
+        return lastName;
     }
 }

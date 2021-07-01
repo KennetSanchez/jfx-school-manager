@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class StudentBasic extends Student {
 
 
-    public StudentBasic(String pName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures) {
-        super(pName, pCourse, pHasRelatives, pCost, pTerapy, pId, pAsignatures);
+    public StudentBasic(String pName, String pLastName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures) {
+        super(pName, pLastName, pCourse, pHasRelatives, pCost, pTerapy, pId, pAsignatures);
     }
     
 }
