@@ -17,13 +17,14 @@ public abstract class Student {
     String ows;
     String extraAsignatures =  "---------";
 
-    ArrayList<String> asignatures;
-
     //Not implemented yet.
     ArrayList<ExtraAsignatures> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(String pName, String pLastName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<String> pAsignatures){
+    public Student(String pName, String pLastName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
+        extraSubjects = new ArrayList<ExtraAsignatures>();
+        extraSubjectCost = new ArrayList<Long>();
+
         cost = pCost;
         name = pName;
         lastName = pLastName;
@@ -33,10 +34,7 @@ public abstract class Student {
         id = pId;
         ows = NEGATION;
         hasRelatives = pHasRelatives;
-        asignatures = pAsignatures;
-
-        extraSubjects = new ArrayList<ExtraAsignatures>();
-        extraSubjectCost = new ArrayList<Long>();
+        extraSubjects = pAsignatures;        
     }
 
     public void addSubject(ExtraAsignatures newSubject){
@@ -128,11 +126,11 @@ public abstract class Student {
         String msg = "";
         int index = 0;
         
-        while(index < asignatures.size()){
-            if(index <asignatures.size()-1){
-                msg += asignatures.get(index) + ", ";
+        while(index < extraSubjects.size()){
+            if(index <extraSubjects.size()-1){
+                msg += extraSubjects.get(index) + ", ";
             }else{
-                msg += asignatures.get(index);
+                msg += extraSubjects.get(index);
             }
             index++;
         }

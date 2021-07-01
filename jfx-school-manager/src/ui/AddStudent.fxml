@@ -18,7 +18,7 @@
          <children>
             <ImageView blendMode="SRC_ATOP" fitHeight="507.0" fitWidth="614.0" layoutX="88.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-manager-restaurant/icons/students.png" />
+                  <Image url="@../../icons/students.png" />
                </image>
             </ImageView>
          </children>
@@ -48,7 +48,7 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="494.0" text="Materias representativas:" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="184.0" layoutY="446.0" text="Materias representativas:" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -82,7 +82,7 @@
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </CheckBox>
-      <TableView fx:id="ADDSTUDENTtvChoosedSignatures" layoutX="41.0" layoutY="536.0" prefHeight="156.0" prefWidth="183.0">
+      <TableView fx:id="ADDSTUDENTtvChoosedSignatures" layoutX="41.0" layoutY="536.0" onMouseClicked="#ADDSTUDENTremoveAsignature" prefHeight="156.0" prefWidth="183.0">
         <columns>
           <TableColumn fx:id="ADDSTUDENTtcChoosedSignatures" prefWidth="182.0" text="Materias elegidas" />
         </columns>
@@ -99,7 +99,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/done.png" />
+                  <Image url="@../../icons/done.png" />
                </image>
             </ImageView>
          </graphic>
@@ -114,12 +114,17 @@
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-manager-restaurant/icons/Back.png" />
+                  <Image url="@../../icons/Back.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="497.0" text="Doble click para remover una materia" textAlignment="CENTER" textFill="#cdcccc">
+         <font>
+            <Font name="Times New Roman Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

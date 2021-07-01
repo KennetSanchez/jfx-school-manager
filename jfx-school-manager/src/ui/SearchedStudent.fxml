@@ -17,17 +17,17 @@
          <children>
             <ImageView fitHeight="472.0" fitWidth="475.0" layoutX="75.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-manager-restaurant/icons/Student.jpg" />
+                  <Image url="@../../icons/Student.jpg" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="104.0" layoutY="474.0" mnemonicParsing="false" onAction="#SEARCHEDSTUDENTPaid" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Pagó" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="104.0" layoutY="474.0" mnemonicParsing="false" onAction="#SEARCHEDSTUDENTPaid" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Pagó" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </Button>
-      <Label layoutX="183.0" layoutY="400.0" prefHeight="23.0" prefWidth="276.0" text="Actualizar información de pago" textFill="WHITE">
+      <Label layoutX="213.0" layoutY="400.0" prefHeight="23.0" prefWidth="276.0" text="Actualizar información de pago" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -43,7 +43,7 @@
             <TableColumn fx:id="SEARCHEDSTUDENTtcInclusion" minWidth="0.0" prefWidth="68.0" text="Inclusión" />
         </columns>
       </TableView>
-      <Button layoutX="432.0" layoutY="474.0" mnemonicParsing="false" onAction="#SEARCHEDSTUDENTPdidnotpay" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="No ha pagado" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="432.0" layoutY="474.0" mnemonicParsing="false" onAction="#SEARCHEDSTUDENTPdidnotpay" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="No ha pagado" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
@@ -55,7 +55,7 @@
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../jfx-manager-restaurant/icons/Back.png" />
+                  <Image url="@../../icons/Back.png" />
                </image>
             </ImageView>
          </graphic>

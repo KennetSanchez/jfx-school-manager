@@ -21,12 +21,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Courses;
 import model.ExtraAsignatures;
 import model.Manager;
 import model.Student;
-import model.StudentBasic;
 
 public class ManagerGUI {
     
@@ -38,21 +38,15 @@ public class ManagerGUI {
     Stage popUpStage;
     Manager manager;
     
-    ArrayList<String> testAsignatures = new ArrayList<String>();
-    
-    
-
-    Student testStudent;
-    
+    ArrayList<ExtraAsignatures> testAsignatures = new ArrayList<ExtraAsignatures>();
     Set<ExtraAsignatures> choosedAsignatures = new HashSet<ExtraAsignatures>();
     
     public ManagerGUI() throws IOException{
         manager = new Manager();
-        testAsignatures.add("DANZA");
-         testStudent = new StudentBasic("Jhon", "Doe", "-", "-", 0L, NEGATION, "000000", testAsignatures);
         mainStage = new Stage();
         popUpStage = new Stage();
         showMainMenu();
+        
     }
 
     //----------------------------------------------------------------- MAIN MENU -----------------------------------------------------------------
@@ -68,13 +62,66 @@ public class ManagerGUI {
 
     @FXML
     void MAINMENUEditStudent(ActionEvent event) throws IOException{
-        showEditStudent(testStudent);
+        showSelectAStudent();
+        showEditStudent();
     }
 
     @FXML
-    void RemoveStudent(ActionEvent event) {
-        
+    void RemoveStudent(ActionEvent event) throws IOException {
+        showSelectAStudent();
     }
+
+    //----------------------------------------------------------------- SELECT A STUDENT -----------------------------------------------------------------
+    Student founded;
+
+    @FXML
+    private Pane SELECTASTUDENTsearchPane;
+
+    @FXML
+    private TableView<Student> SELECTASTUDENTtvStudent;
+
+    @FXML
+    private TableColumn<Student, String> SELECTASTUDENTtcFullName;
+
+    @FXML
+    private TableColumn<Student, String> SELECTASTUDENTtcId;
+
+    @FXML
+    private TableColumn<Student, String> SELECTASTUDENTtcCourse;
+
+    @FXML
+    private TextField SELECTASTUDENTtxtId;
+
+    @FXML
+    private Pane SELECTASTUDENTbasicPane;
+
+    @FXML
+    void SELECTASTUDENTaccept(ActionEvent event) throws IOException {
+        selectedStudent = founded;
+        showEditStudent();
+    }
+
+    @FXML
+    void SELECTASTUDENTsearch(ActionEvent event) {
+        String id = SELECTASTUDENTtxtId.getText();
+        founded = manager.searchStudent(id);
+
+        if(founded != null){
+            SELECTASTUDENTtvStudent.setItems(FXCollections.observableArrayList(founded));
+            SELECTASTUDENTtcFullName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+            SELECTASTUDENTtcId.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
+            SELECTASTUDENTtcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
+            SELECTASTUDENTbasicPane.setVisible(false);
+            SELECTASTUDENTsearchPane.setVisible(true);
+        }
+
+    }
+
+    @FXML
+    void SELECTASTUDENTback(ActionEvent event) throws IOException {
+        showMainMenu();
+    }
+    
     //----------------------------------------------------------------- LIST ALL STUDENTS -----------------------------------------------------------------
     
     Student choosedStudent;
@@ -142,7 +189,7 @@ public class ManagerGUI {
             alert.setContentText("Escribe el nombre e intenta nuevamente");
             alert.show();
         }else{
-            ArrayList<Student> foundedStudents  = manager.searchStudent(studentId);
+            Student foundedStudents  = manager.searchStudent(studentId);
             showSearchedStudent(foundedStudents);
         }
     }
@@ -228,13 +275,13 @@ public class ManagerGUI {
             String msg = fullName + " con identificación " + id + " ha sido registrado(a) exitosamente en "+ course;
             long cost = 0;
             
-            ArrayList<String> asignaturesArrayString = new ArrayList<String>();
+            ArrayList<ExtraAsignatures> asignatures = new ArrayList<ExtraAsignatures>();
 
              for(ExtraAsignatures asignature: choosedAsignatures){
-                asignaturesArrayString.add(asignature + "");
+                asignatures.add(asignature);
             }
 
-            manager.addStudent(names, lastNames, course, hasRelatives, cost, terapy, id, asignaturesArrayString);
+            manager.addStudent(names, lastNames, course, hasRelatives, cost, terapy, id, asignatures);
 
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("¡Hecho!");
@@ -268,6 +315,14 @@ public class ManagerGUI {
         }
     }
 
+    @FXML
+    void ADDSTUDENTremoveAsignature(MouseEvent event) {
+        if(event.getClickCount() == 2){
+            ExtraAsignatures asignatureToRemove = ADDSTUDENTtvChoosedSignatures.getSelectionModel().getSelectedItem();
+            choosedAsignatures.remove(asignatureToRemove);
+            refreshAddStudentChoosedAsignatures();
+        }
+    }
 
     //-----------------------------------------------------------------  SEARCHED STUDENT -----------------------------------------------------------------
 
@@ -313,6 +368,7 @@ public class ManagerGUI {
     //-----------------------------------------------------------------  EDIT STUDENT -----------------------------------------------------------------
     
     Student modifiedStudent;
+    Student selectedStudent;
     
     @FXML
     private TextField EDITSTUDENTtxtName;
@@ -340,10 +396,10 @@ public class ManagerGUI {
 
     //This should be working with ExtraAsignatures
     @FXML
-    private TableView<String> EDITSTUDENTtvChoosedSignatures;
+    private TableView<ExtraAsignatures> EDITSTUDENTtvChoosedSignatures;
 
     @FXML
-    private TableColumn<String, String> EDITSTUDENTtcChoosedSignatures;
+    private TableColumn<ExtraAsignatures, String> EDITSTUDENTtcChoosedSignatures;
 
     
     @FXML
@@ -354,12 +410,14 @@ public class ManagerGUI {
 
     @FXML
     void EDITSTUDENTaddAsignature(MouseEvent event) {
-
+        ExtraAsignatures choosed = EDITSTUDENTtvAvaibleAsignatures.getSelectionModel().getSelectedItem();
+        choosedAsignatures.add(choosed);
+        refreshEditStudentChoosedAsignatures();
     }
 
     @FXML
-    void EDITSTUDENTback(ActionEvent event) {
-
+    void EDITSTUDENTback(ActionEvent event) throws IOException {
+        showMainMenu();    
     }
 
     @FXML
@@ -369,11 +427,15 @@ public class ManagerGUI {
 
     @FXML
     void EDITSTUDENTremoveAsignature(MouseEvent event) {
-
+        if(event.getClickCount() == 2){
+            ExtraAsignatures asignatureToRemove = EDITSTUDENTtvChoosedSignatures.getSelectionModel().getSelectedItem();
+            manager.removeSubject(selectedStudent, asignatureToRemove);
+            refreshEditStudentChoosedAsignatures();
+        }
     }
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
 
-    private void showSearchedStudent(ArrayList<Student> students) throws IOException{
+    private void showSearchedStudent(Student foundedStudents) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchedStudent.fxml"));
         loader.setController(this);
         Parent root = loader.load();
@@ -383,8 +445,8 @@ public class ManagerGUI {
         mainStage.hide();
 
        
-       if(students != null){
-        ObservableList<Student> obStudents = FXCollections.observableArrayList(students);
+       if(foundedStudents != null){
+        ObservableList<Student> obStudents = FXCollections.observableArrayList(foundedStudents);
         LISTALLSTUDENTStvStudents.setItems(obStudents);
 
         LISTALLSTUDENTStcFullName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
@@ -404,6 +466,7 @@ public class ManagerGUI {
     }
 
     private void showMainMenu() throws IOException{
+        founded = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml")); 
         loader.setController(this); 
         Parent root = loader.load(); 
@@ -435,6 +498,7 @@ public class ManagerGUI {
     }
 
     private void showAddStudent() throws IOException{
+        choosedAsignatures.clear();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddStudent.fxml"));
         loader.setController(this); 
         Parent root = loader.load();
@@ -476,7 +540,9 @@ public class ManagerGUI {
         }
     }
 
-    private void showEditStudent(Student selectedStudent) throws IOException{
+    private void showEditStudent() throws IOException{
+        if(selectedStudent != null){
+        choosedAsignatures.clear();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EditStudent.fxml"));
         loader.setController(this); 
         Parent root = loader.load();
@@ -513,9 +579,47 @@ public class ManagerGUI {
             EDITSTUDENTcbHasnotTerapy.setSelected(true);
         }
 
-        EDITSTUDENTtvChoosedSignatures.setItems(FXCollections.observableArrayList(selectedStudent.getAsignaturesString()));
-        EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<String, String>("name"));
+        EDITSTUDENTtvChoosedSignatures.setItems(FXCollections.observableArrayList(selectedStudent.getSubject()));
+        EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
 
         popUpStage.show();
+        }
+    }
+
+    private void refreshEditStudentChoosedAsignatures(){
+        ArrayList<ExtraAsignatures> asignaturesArray = new ArrayList<ExtraAsignatures>();
+
+        //This saves the registred asignatures.
+        ArrayList<ExtraAsignatures> oldAsignatures = selectedStudent.getSubject();
+
+        for(ExtraAsignatures asignature: oldAsignatures){
+            asignaturesArray.add(asignature);
+        }
+
+
+        for(ExtraAsignatures asignature: choosedAsignatures){
+            asignaturesArray.add(asignature);
+        }
+        
+        if(asignaturesArray.size() != 0){
+            ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
+            EDITSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
+            EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
+        }else{
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Ningun elemento fue elegido");
+            alert.setContentText("Intente nuevamente");
+            alert.show();
+        }
+    }
+
+    private void showSelectAStudent() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectAStudent.fxml"));
+        loader.setController(this); 
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        mainStage.setScene(scene);
+        mainStage.show();
     }
 }

@@ -29,10 +29,17 @@
          </font>
       </Label>
       <TextField fx:id="LISTALLSTUDENTSidSearched" layoutX="1069.0" layoutY="365.0" prefHeight="25.0" prefWidth="210.0" promptText="Identificación (solo números)" />
-      <Button layoutX="1114.0" layoutY="430.0" mnemonicParsing="false" onAction="#LISTALLSTUDENTSSearch" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Buscar" textFill="WHITE">
+      <Button contentDisplay="RIGHT" layoutX="1114.0" layoutY="430.0" mnemonicParsing="false" onAction="#LISTALLSTUDENTSSearch" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Buscar" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
-         </font></Button>
+         </font>
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/search.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <Button layoutX="1114.0" layoutY="168.0" mnemonicParsing="false" onAction="#LISTALLSTUDENTSPaid" prefHeight="46.0" prefWidth="121.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Pagó" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
@@ -50,7 +57,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-manager-restaurant/icons/Back.png" />
+                  <Image url="@../../icons/Back.png" />
                </image>
             </ImageView>
          </graphic>
