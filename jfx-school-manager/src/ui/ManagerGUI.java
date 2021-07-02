@@ -242,7 +242,7 @@ public class ManagerGUI {
         String names = ADDSTUDENTtxtName.getText();
         String lastNames = ADDSTUDENTtxtLastNames.getText();
         String id = ADDSTUDENTtxtId.getText();
-        String course = ADDSTUDENTcbCourse.getSelectionModel().getSelectedItem()+"";
+        Courses course = ADDSTUDENTcbCourse.getSelectionModel().getSelectedItem();
 
         String fullName = names + " " + lastNames;
         String hasRelatives = "";
@@ -264,7 +264,7 @@ public class ManagerGUI {
         if(names != ""){
             if(lastNames != ""){
                 if(id != ""){
-                    if(course != ""){
+                    if(course != null){
                         completed = true;
                     }
                 }
@@ -273,7 +273,6 @@ public class ManagerGUI {
 
         if(completed){
             String msg = fullName + " con identificación " + id + " ha sido registrado(a) exitosamente en "+ course;
-            long cost = 0;
             
             ArrayList<ExtraAsignatures> asignatures = new ArrayList<ExtraAsignatures>();
 
@@ -281,7 +280,7 @@ public class ManagerGUI {
                 asignatures.add(asignature);
             }
 
-            manager.addStudent(names, lastNames, course, hasRelatives, cost, terapy, id, asignatures);
+            manager.addStudent(names, lastNames, course, hasRelatives, terapy, id, asignatures);
 
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("¡Hecho!");

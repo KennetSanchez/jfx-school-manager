@@ -10,7 +10,7 @@ public abstract class Student {
     
     String hasRelatives;  
     String name, lastName, fullName;
-    String course;
+    Courses course;
     String terapy;
     String id;
     long cost;
@@ -21,7 +21,7 @@ public abstract class Student {
     ArrayList<ExtraAsignatures> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(String pName, String pLastName, String pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
+    public Student(String pName, String pLastName, Courses pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
         extraSubjects = new ArrayList<ExtraAsignatures>();
         extraSubjectCost = new ArrayList<Long>();
 
@@ -87,11 +87,11 @@ public abstract class Student {
         this.name = name;
     }
 
-    public String getCourse() {
+    public Courses getCourse() {
         return this.course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(Courses course) {
         this.course = course;
     }
 
