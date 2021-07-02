@@ -36,7 +36,7 @@
          <graphic>
             <ImageView fitHeight="29.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/search.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/search.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -57,7 +57,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/Back.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Back.png" />
                </image>
             </ImageView>
          </graphic>

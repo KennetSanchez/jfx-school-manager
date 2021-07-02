@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,7 +39,6 @@ public class ManagerGUI {
     Stage popUpStage;
     Manager manager;
     
-    ArrayList<ExtraAsignatures> testAsignatures = new ArrayList<ExtraAsignatures>();
     Set<ExtraAsignatures> choosedAsignatures = new HashSet<ExtraAsignatures>();
     
     public ManagerGUI() throws IOException{
@@ -62,17 +62,17 @@ public class ManagerGUI {
 
     @FXML
     void MAINMENUEditStudent(ActionEvent event) throws IOException{
-        showSelectAStudent();
-        showEditStudent();
+        showSelectAStudent(1);
     }
 
     @FXML
     void RemoveStudent(ActionEvent event) throws IOException {
-        showSelectAStudent();
+        showSelectAStudent(2);
     }
 
     //----------------------------------------------------------------- SELECT A STUDENT -----------------------------------------------------------------
     Student founded;
+    int option;
 
     @FXML
     private Pane SELECTASTUDENTsearchPane;
@@ -98,12 +98,22 @@ public class ManagerGUI {
     @FXML
     void SELECTASTUDENTaccept(ActionEvent event) throws IOException {
         selectedStudent = founded;
-        showEditStudent();
+        if(selectedStudent != null){
+            switch(option){
+                case 1: showEditStudent();
+                        break;
+    
+                case 2: showRemoveStudent();
+                        break;
+            }
+        }
     }
 
     @FXML
     void SELECTASTUDENTsearch(ActionEvent event) {
-        String id = SELECTASTUDENTtxtId.getText();
+        founded = null;
+
+        String id = SELECTASTUDENTtxtId.getText();       
         founded = manager.searchStudent(id);
 
         if(founded != null){
@@ -113,6 +123,12 @@ public class ManagerGUI {
             SELECTASTUDENTtcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
             SELECTASTUDENTbasicPane.setVisible(false);
             SELECTASTUDENTsearchPane.setVisible(true);
+        }else{
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se ha encontrado ningún estudiante con esta identificación");
+            alert.setContentText("Intenta nuevamente");
+            alert.show();
         }
 
     }
@@ -122,6 +138,8 @@ public class ManagerGUI {
         showMainMenu();
     }
     
+    @FXML
+    private Label SELECTASTUDENTtitle;
     //----------------------------------------------------------------- LIST ALL STUDENTS -----------------------------------------------------------------
     
     Student choosedStudent;
@@ -136,10 +154,10 @@ public class ManagerGUI {
     private TableColumn<Student, String> LISTALLSTUDENTStcId;
 
     @FXML
-    private TableColumn<Student, String> LISTALLSTUDENTStcCourse;
+    private TableColumn<Student, Courses> LISTALLSTUDENTStcCourse;
 
     @FXML
-    private TableColumn<Student, Long> LISTALLSTUDENTStcCost;
+    private TableColumn<Student, Float> LISTALLSTUDENTStcCost;
 
     @FXML
     private TableColumn<Student, String> LISTALLSTUDENTStcExtraSubjects;
@@ -271,7 +289,10 @@ public class ManagerGUI {
             }
         }
 
-        if(completed){
+        boolean terapyBoolean = ADDSTUDENTcheckTerapy();
+        boolean relativesBoolean = ADDSTUDENTcheckRelatives();
+
+        if(completed && terapyBoolean && relativesBoolean){
             String msg = fullName + " con identificación " + id + " ha sido registrado(a) exitosamente en "+ course;
             
             ArrayList<ExtraAsignatures> asignatures = new ArrayList<ExtraAsignatures>();
@@ -323,6 +344,38 @@ public class ManagerGUI {
         }
     }
 
+    private boolean ADDSTUDENTcheckTerapy(){
+        boolean onePicked = false;
+        if(ADDSTUDENTcbHasTerapy.isSelected() && ADDSTUDENTcbHasnotTerapy.isSelected()){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Parece que has marcado ambas opciones en: terapia");
+            alert.setContentText("Selecciona solo una");
+            alert.show();
+            ADDSTUDENTcbHasTerapy.setSelected(false);
+            ADDSTUDENTcbHasnotTerapy.setSelected(false);
+        }else if(ADDSTUDENTcbHasTerapy.isSelected() || ADDSTUDENTcbHasnotTerapy.isSelected()){
+            onePicked = true;
+        }
+        return onePicked;
+    }
+
+    private boolean ADDSTUDENTcheckRelatives(){
+        boolean onePicked = false;
+        if(ADDSTUDENTcbHasRelatives.isSelected() && ADDSTUDENTcbHasnotRelatives.isSelected()){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Parece que has marcado ambas opciones en: familiares");
+            alert.setContentText("Selecciona solo una");
+            alert.show();
+            ADDSTUDENTcbHasRelatives.setSelected(false);
+            ADDSTUDENTcbHasnotRelatives.setSelected(false);
+        }else if(ADDSTUDENTcbHasRelatives.isSelected() || ADDSTUDENTcbHasnotRelatives.isSelected()){
+            onePicked = true;
+        }
+        return onePicked;
+    }
+
     //-----------------------------------------------------------------  SEARCHED STUDENT -----------------------------------------------------------------
 
     @FXML
@@ -365,8 +418,6 @@ public class ManagerGUI {
     }
 
     //-----------------------------------------------------------------  EDIT STUDENT -----------------------------------------------------------------
-    
-    Student modifiedStudent;
     Student selectedStudent;
     
     @FXML
@@ -420,8 +471,69 @@ public class ManagerGUI {
     }
 
     @FXML
-    void EDITSTUDENTedit(ActionEvent event) {
+    void EDITSTUDENTedit(ActionEvent event) throws IOException {
+        
+        String names = EDITSTUDENTtxtName.getText();
+        String lastNames = EDITSTUDENTtxtLastNames.getText();
+        String id = EDITSTUDENTtxtId.getText();
+        Courses course = EDITSTUDENTcbCourse.getSelectionModel().getSelectedItem();
 
+        String fullName = names + " " + lastNames;
+        String hasRelatives = "";
+        if(EDITSTUDENTcbHasRelatives.isSelected()){
+            hasRelatives = AFFIRMATION;
+        }else if(EDITSTUDENTcbHasnotRelatives.isSelected()){
+            hasRelatives = NEGATION;
+        }
+
+        String terapy = "";
+        if(EDITSTUDENTcbHasTerapy.isSelected()){
+            terapy = AFFIRMATION;
+        }else if(EDITSTUDENTcbHasnotTerapy.isSelected()){
+            terapy = NEGATION;
+        }
+        boolean completed = false;
+        
+        //Verification
+        if(names != ""){
+            if(lastNames != ""){
+                if(id != ""){
+                    if(course != null){
+                        completed = true;
+                    }
+                }
+            }
+        }
+
+        boolean terapyBoolean = EDITSTUDENTcheckTerapy();
+        boolean relativesBoolean = EDITSTUDENTcheckRelatives();
+        
+        if(completed && terapyBoolean && relativesBoolean){
+            String msg = fullName + " con identificación " + id + " ha sido editado(a) exitosamente en "+ course;
+            
+            ArrayList<ExtraAsignatures> asignatures = selectedStudent.getSubject();
+
+             for(ExtraAsignatures asignature: choosedAsignatures){
+                asignatures.add(asignature);
+            }
+
+            manager.editStudent(selectedStudent, names, lastNames, course, hasRelatives, terapy, id, asignatures);
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("¡Hecho!");
+            alert.setHeaderText("Editado exitosamente");
+            alert.setContentText(msg);
+            alert.showAndWait();
+            showStudentsList();
+        }else{
+            String msg = "Revisa los campos obligatorios y vuelve a intentar";
+            
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Faltan campos por llenar");
+            alert.setContentText(msg);
+            alert.show();
+        }
     }
 
     @FXML
@@ -431,6 +543,80 @@ public class ManagerGUI {
             manager.removeSubject(selectedStudent, asignatureToRemove);
             refreshEditStudentChoosedAsignatures();
         }
+    }
+
+    private boolean EDITSTUDENTcheckTerapy(){
+        boolean onePicked = false;
+        if(EDITSTUDENTcbHasTerapy.isSelected() && EDITSTUDENTcbHasnotTerapy.isSelected()){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Parece que has marcado ambas opciones en: terapia");
+            alert.setContentText("Selecciona solo una");
+            alert.show();
+            EDITSTUDENTcbHasTerapy.setSelected(false);
+            EDITSTUDENTcbHasnotTerapy.setSelected(false);
+        }else if(EDITSTUDENTcbHasTerapy.isSelected() || EDITSTUDENTcbHasnotTerapy.isSelected()){
+            onePicked = true;
+        }
+        return onePicked;
+    }
+
+    private boolean EDITSTUDENTcheckRelatives(){
+        boolean onePicked = false;
+        if(EDITSTUDENTcbHasRelatives.isSelected() && EDITSTUDENTcbHasnotRelatives.isSelected()){
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Parece que has marcado ambas opciones en: familiares");
+            alert.setContentText("Selecciona solo una");
+            alert.show();
+            EDITSTUDENTcbHasRelatives.setSelected(false);
+            EDITSTUDENTcbHasnotRelatives.setSelected(false);
+        }else if(EDITSTUDENTcbHasRelatives.isSelected() || EDITSTUDENTcbHasnotRelatives.isSelected()){
+            onePicked = true;
+        }
+        return onePicked;
+    }
+
+    //-----------------------------------------------------------------  REMOVE STUDENT -----------------------------------------------------------------
+
+    @FXML
+    private TableView<Student> REMOVEASTUDENTtv;
+
+    @FXML
+    private TableColumn<Student, String> REMOVEASTUDENTtcName;
+
+    @FXML
+    private TableColumn<Student, String> REMOVEASTUDENTtcId;
+
+    @FXML
+    private TableColumn<Student, Courses> REMOVEASTUDENTtcCourse;
+
+    @FXML
+    private TableColumn<Student, ExtraAsignatures> REMOVEASTUDENTtcExtra;
+
+    @FXML
+    private TableColumn<Student, Float> REMOVEASTUDENTtcCost;
+
+    @FXML
+    private TableColumn<Student, String> REMOVEASTUDENTtcOwe;
+
+    @FXML
+    private TableColumn<Student, String> REMOVEASTUDENTtcInclusion;
+
+    @FXML
+    void REMOVEASTUDENTback(ActionEvent event) throws IOException {
+        showMainMenu();
+    }
+
+    @FXML
+    void REMOVEASTUDENTremove(ActionEvent event)throws IOException {
+        manager.removeStudent(selectedStudent);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Hecho");
+        alert.setHeaderText("Alumno(a) eliminado correctamente");
+        alert.setContentText("A continuación se mostrará la lista de estudiantes actualizada");
+        alert.show();
+        showStudentsList();
     }
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
 
@@ -449,9 +635,9 @@ public class ManagerGUI {
         LISTALLSTUDENTStvStudents.setItems(obStudents);
 
         LISTALLSTUDENTStcFullName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-        LISTALLSTUDENTStcCost.setCellValueFactory(new PropertyValueFactory<Student, Long>("cost"));
+        LISTALLSTUDENTStcCost.setCellValueFactory(new PropertyValueFactory<Student, Float>("cost"));
         LISTALLSTUDENTStcHasRelatives.setCellValueFactory(new PropertyValueFactory<Student, String>("hasRelatives"));
-        LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
+        LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, Courses>("course"));
         LISTALLSTUDENTStcExtraSubjects.setCellValueFactory(new PropertyValueFactory<Student, String>("extraSubjects"));
 
        }else{
@@ -466,6 +652,8 @@ public class ManagerGUI {
 
     private void showMainMenu() throws IOException{
         founded = null;
+        selectedStudent = null;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml")); 
         loader.setController(this); 
         Parent root = loader.load(); 
@@ -484,8 +672,8 @@ public class ManagerGUI {
         ObservableList<Student> students = FXCollections.observableArrayList(manager.getStudents());
         LISTALLSTUDENTStvStudents.setItems(students);
         LISTALLSTUDENTStcFullName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-        LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, String>("course"));
-        LISTALLSTUDENTStcCost.setCellValueFactory(new PropertyValueFactory<Student, Long>("cost"));
+        LISTALLSTUDENTStcCourse.setCellValueFactory(new PropertyValueFactory<Student, Courses>("course"));
+        LISTALLSTUDENTStcCost.setCellValueFactory(new PropertyValueFactory<Student, Float>("cost"));
         LISTALLSTUDENTStcId.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
         LISTALLSTUDENTStcHasRelatives.setCellValueFactory(new PropertyValueFactory<Student, String>("hasRelatives"));
         LISTALLSTUDENTStcOwe.setCellValueFactory(new PropertyValueFactory<Student, String>("ows"));
@@ -563,8 +751,7 @@ public class ManagerGUI {
         EDITSTUDENTtxtName.setText(selectedStudent.getName());
         EDITSTUDENTtxtLastNames.setText(selectedStudent.getLastName());
         EDITSTUDENTtxtId.setText(selectedStudent.getId());
-        //Just for testing purposes.
-        EDITSTUDENTcbCourse.setValue(Courses.ONCE);
+        EDITSTUDENTcbCourse.setValue(selectedStudent.getCourse());
         
         if(selectedStudent.getHasRelatives().equals(AFFIRMATION)){
             EDITSTUDENTcbHasRelatives.setSelected(true);
@@ -599,26 +786,61 @@ public class ManagerGUI {
         for(ExtraAsignatures asignature: choosedAsignatures){
             asignaturesArray.add(asignature);
         }
+                
+        ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
+        EDITSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
+        EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
         
-        if(asignaturesArray.size() != 0){
-            ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
-            EDITSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
-            EDITSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
-        }else{
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText("Ningun elemento fue elegido");
-            alert.setContentText("Intente nuevamente");
-            alert.show();
-        }
     }
 
-    private void showSelectAStudent() throws IOException{
+    private void showSelectAStudent(int pOption) throws IOException{
+        selectedStudent = null;
+        choosedAsignatures.clear();
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectAStudent.fxml"));
         loader.setController(this); 
         Parent root = loader.load();
         Scene scene = new Scene(root);
         mainStage.setScene(scene);
+
+        String current;
+        this.option = pOption;
         mainStage.show();
+
+        switch(pOption){
+            case 1: current = SELECTASTUDENTtitle.getText();
+                    SELECTASTUDENTtitle.setText(current + " editar:");
+                    break;
+
+            case 2: current = SELECTASTUDENTtitle.getText();
+                    SELECTASTUDENTtitle.setText(current + " eliminar:");
+                    break;
+        }
+        
+        
+    }
+
+    private void showRemoveStudent() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveAStudent.fxml")); 
+        loader.setController(this); 
+        Parent root = loader.load(); 
+        Scene scene = new Scene(root); 
+
+        ArrayList<Student> array = new ArrayList<Student>();
+        ObservableList<Student> obStudent = FXCollections.observableArrayList(array);
+        array.add(selectedStudent);
+
+        REMOVEASTUDENTtv.setItems(obStudent);
+        REMOVEASTUDENTtcName.setCellValueFactory(new PropertyValueFactory<Student, String>("fullName"));
+        REMOVEASTUDENTtcCost.setCellValueFactory(new PropertyValueFactory<Student, Float>("cost"));
+        REMOVEASTUDENTtcCourse.setCellValueFactory(new PropertyValueFactory<Student, Courses>("course"));
+        REMOVEASTUDENTtcId.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
+        REMOVEASTUDENTtcOwe.setCellValueFactory(new PropertyValueFactory<Student, String>("ows"));
+        REMOVEASTUDENTtcInclusion.setCellValueFactory(new PropertyValueFactory<Student, String>("inclusion"));
+        REMOVEASTUDENTtcExtra.setCellValueFactory(new PropertyValueFactory<Student, ExtraAsignatures>("subject"));
+
+        popUpStage.setScene(scene); 
+        mainStage.hide(); 
+        popUpStage.show();     
     }
 }

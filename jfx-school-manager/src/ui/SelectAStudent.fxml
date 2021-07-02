@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1300.0" style="-fx-background-color: #236E7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="260.0" layoutY="82.0" prefHeight="23.0" prefWidth="179.0" text="Estudiante a editar:" textFill="WHITE">
+      <Label fx:id="SELECTASTUDENTtitle" layoutX="231.0" layoutY="83.0" prefHeight="23.0" prefWidth="239.0" text="Estudiante a" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -53,7 +53,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/search.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/search.png" />
                </image>
             </ImageView>
          </graphic>
@@ -62,7 +62,7 @@
          <children>
             <ImageView fitHeight="277.0" fitWidth="350.0" layoutX="160.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/Student.jpg" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Student.jpg" />
                </image>
             </ImageView>
          </children>
@@ -74,7 +74,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/Back.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Back.png" />
                </image>
             </ImageView>
          </graphic>

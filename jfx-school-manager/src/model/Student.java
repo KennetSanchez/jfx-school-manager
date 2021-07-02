@@ -13,7 +13,7 @@ public abstract class Student {
     Courses course;
     String terapy;
     String id;
-    long cost;
+    float cost;
     String ows;
     String extraAsignatures =  "---------";
 
@@ -21,7 +21,7 @@ public abstract class Student {
     ArrayList<ExtraAsignatures> extraSubjects;
     ArrayList<Long> extraSubjectCost;
 
-    public Student(String pName, String pLastName, Courses pCourse, String pHasRelatives, long pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
+    public Student(String pName, String pLastName, Courses pCourse, String pHasRelatives, float pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
         extraSubjects = new ArrayList<ExtraAsignatures>();
         extraSubjectCost = new ArrayList<Long>();
 
@@ -71,12 +71,12 @@ public abstract class Student {
         this.hasRelatives = hasRelatives;
     }
 
-    public long getCost() {
+    public float getCost() {
         return this.cost;
     }
 
-    public void setCost(long cost) {
-        this.cost = cost;
+    public void setCost(float cost2) {
+        this.cost = cost2;
     }
 
     public String getName() {
@@ -143,5 +143,21 @@ public abstract class Student {
 
     public String getLastName(){
         return lastName;
+    }
+
+    public void setTerapy(String pTerapy) {
+        terapy = pTerapy;
+    }
+
+    public void setExtraSubjects(ArrayList<ExtraAsignatures> pAsignatures) {
+        extraSubjects = pAsignatures;
+    }
+
+    public void setLastName(String pLastNames) {
+        lastName = pLastNames;
+    }
+
+    public String getFullName(){
+        return fullName;
     }
 }

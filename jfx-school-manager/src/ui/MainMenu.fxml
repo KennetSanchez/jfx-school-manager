@@ -24,12 +24,12 @@
             </Button>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="241.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/UpdateStudent.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/UpdateStudent.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="224.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/SearchStudent.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/SearchStudent.png" />
                </image>
             </ImageView>
          </children>
@@ -46,12 +46,12 @@
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="182.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../icons/AddStudent.png" />
+            <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/AddStudent.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="179.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../icons/RemoveStudent.png" />
+            <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/RemoveStudent.png" />
          </image>
       </ImageView>
    </children>

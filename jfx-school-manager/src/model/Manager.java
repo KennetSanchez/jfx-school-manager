@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class Manager {
 
     //This are the constants to calculate the prices.
-    private final static long ELEMENTARY_SCHOOL_COST = 150000L;
-    private final static long HIGH_SCHOOL_COST = 165000L;
-    private final static long INCLUSION_COST = 225000L;
+    private final static float ELEMENTARY_SCHOOL_COST = 150000f;
+    private final static float HIGH_SCHOOL_COST = 165000f;
+    private final static float INCLUSION_COST = 225000f;
+    private final static float FAMILY_DISCOUNT = 0.1f;
 
     //This is the cost of each extra asignatures in the enum "ExtraAsignatures"
-    private final static long EXTRA_ASIGNATURE_COST = 40000L;
+    private final static float EXTRA_ASIGNATURE_COST = 40000f;
 
     //This is the position of the last primary course of the school in the enum "Courses", minus 1.
     private final static int LAST_ELEMENTARY_COURSE_INDEX = 5;
@@ -30,9 +31,9 @@ public class Manager {
     }
 
 
-    private long calculateCost(Courses course, ArrayList<ExtraAsignatures> extraAsignatures, String hasTerapy, String hasRelatives){
-        long cost = 0;
-        
+    private float calculateCost(Courses course, ArrayList<ExtraAsignatures> extraAsignatures, String hasTerapy, String hasRelatives){
+        float cost = 0;
+
         //This calculates the cost of the basic asignatures. 
         //There's a special case because inclusion have another price, no matter if it's a high or elementary course.
         if(LAST_ELEMENTARY_COURSE.compareTo(course)>= 0){
@@ -43,9 +44,12 @@ public class Manager {
             cost = HIGH_SCHOOL_COST;
         }
 
+        if(hasRelatives.equals(AFFIRMATION)){
+            cost = cost*(1-FAMILY_DISCOUNT);
+        }
+
         //This calculates the extra cost for each extra asignature
         cost += (extraAsignatures.size()*EXTRA_ASIGNATURE_COST);
-
         return cost;
     }
 
@@ -62,7 +66,7 @@ public class Manager {
     }
 
     public void addStudent(String name, String lastName, Courses course, String hasRelatives, String terapy, String id, ArrayList<ExtraAsignatures> asignatures){
-        Long cost = calculateCost(course, asignatures, terapy, hasRelatives);
+        float cost = calculateCost(course, asignatures, terapy, hasRelatives);
         StudentBasic newStudent = new StudentBasic(name, lastName, course, hasRelatives, cost, terapy, id, asignatures);
         allStudents.add(newStudent);
     }
@@ -71,6 +75,18 @@ public class Manager {
         if(selectedStudent != null){
             selectedStudent.removeSubject(asignatureToRemove);
         }
+    }
+
+    public void editStudent(Student selectedStudent, String names, String lastNames, Courses course, String hasRelatives, String terapy, String id, ArrayList<ExtraAsignatures> asignatures) {
+        float cost = calculateCost(course, asignatures, terapy, hasRelatives);
+        selectedStudent.setName(names);
+        selectedStudent.setLastName(lastNames);
+        selectedStudent.setCost(cost);
+        selectedStudent.setCourse(course);
+        selectedStudent.setTerapy(terapy);
+        selectedStudent.setHasRelatives(hasRelatives);
+        selectedStudent.setExtraSubjects(asignatures);
+        selectedStudent.setId(id);
     }
     //-------------------------------------------------- GETTERS FOR UI --------------------------------------------------
     
@@ -97,4 +113,10 @@ public class Manager {
     public ArrayList<Student> getStudents(){
         return allStudents;
     }
+
+
+    public void removeStudent(Student selectedStudent) {
+        allStudents.remove(selectedStudent);
+    }
+
 }

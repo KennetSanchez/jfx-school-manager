@@ -18,7 +18,7 @@
          <children>
             <ImageView blendMode="SRC_ATOP" fitHeight="507.0" fitWidth="614.0" layoutX="88.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/students.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/students.png" />
                </image>
             </ImageView>
          </children>
@@ -38,7 +38,7 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="327.0" text="¿Es el único de su familia?" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="327.0" text="¿Hay familiares matriculados?" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
@@ -62,22 +62,22 @@
       <TextField fx:id="EDITSTUDENTtxtLastNames" layoutX="302.0" layoutY="93.0" prefHeight="25.0" prefWidth="202.0" />
       <ComboBox fx:id="EDITSTUDENTcbCourse" layoutX="299.0" layoutY="168.0" prefHeight="25.0" prefWidth="202.0" />
       <TextField fx:id="EDITSTUDENTtxtId" layoutX="303.0" layoutY="250.0" prefHeight="25.0" prefWidth="202.0" />
-      <CheckBox fx:id="EDITSTUDENTcbHasRelatives" layoutX="294.0" layoutY="330.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="Sí" textFill="WHITE">
+      <CheckBox fx:id="EDITSTUDENTcbHasRelatives" layoutX="330.0" layoutY="330.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="Sí" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="EDITSTUDENTcbHasnotRelatives" layoutX="396.0" layoutY="330.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="No" textFill="WHITE">
+      <CheckBox fx:id="EDITSTUDENTcbHasnotRelatives" layoutX="427.0" layoutY="330.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="No" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="EDITSTUDENTcbHasTerapy" layoutX="294.0" layoutY="400.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="Sí" textFill="WHITE">
+      <CheckBox fx:id="EDITSTUDENTcbHasTerapy" layoutX="330.0" layoutY="400.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="Sí" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="EDITSTUDENTcbHasnotTerapy" layoutX="396.0" layoutY="400.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="No" textFill="WHITE">
+      <CheckBox fx:id="EDITSTUDENTcbHasnotTerapy" layoutX="427.0" layoutY="400.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="47.0" text="No" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="12.0" />
          </font>
@@ -116,7 +116,7 @@
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/Back.png" />
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Back.png" />
                </image>
             </ImageView>
          </graphic>
