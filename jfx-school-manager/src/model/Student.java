@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Student {
+public class Student implements Serializable{
 
     //This variables are for parsing booleans into spanish Strings.
    // private final static String AFFIRMATION = "Sí";
@@ -16,14 +17,13 @@ public abstract class Student {
     float cost;
     String ows;
     String extraAsignatures =  "---------";
+    private final static String SEPARATOR_STRING = "/";
 
     //Not implemented yet.
     ArrayList<ExtraAsignatures> extraSubjects;
-    ArrayList<Long> extraSubjectCost;
 
     public Student(String pName, String pLastName, Courses pCourse, String pHasRelatives, float pCost, String pTerapy, String pId, ArrayList<ExtraAsignatures> pAsignatures){
         extraSubjects = new ArrayList<ExtraAsignatures>();
-        extraSubjectCost = new ArrayList<Long>();
 
         cost = pCost;
         name = pName;
@@ -41,24 +41,13 @@ public abstract class Student {
         extraSubjects.add(newSubject);
     }
 
-    public void addSubjectCost(Long newCost){
-        extraSubjectCost.add(newCost);
-    }
-
     public void removeSubject(ExtraAsignatures subjectToRemove){
         extraSubjects.remove(subjectToRemove);
     }
 
-    public void removeSubjectCost(Long newCost){
-        extraSubjectCost.remove(newCost);
-    }
 
     public ArrayList<ExtraAsignatures> getSubject(){
         return extraSubjects;
-    }
-
-    public ArrayList<Long> getSubjectCost(){
-        return extraSubjectCost;
     }
 
     //------------------------------------------------------------- GETTERS AND SETTERS -------------------------------------------------------------
@@ -159,5 +148,14 @@ public abstract class Student {
 
     public String getFullName(){
         return fullName;
+    }
+
+    public String toString(){
+        String msg = "";
+
+        msg = name + SEPARATOR_STRING + lastName + SEPARATOR_STRING + course + SEPARATOR_STRING + id + SEPARATOR_STRING + terapy;
+        msg += SEPARATOR_STRING + hasRelatives + SEPARATOR_STRING + ows + SEPARATOR_STRING + extraAsignatures.toString();
+
+        return msg;
     }
 }

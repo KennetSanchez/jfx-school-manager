@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1300.0" style="-fx-background-color: #236E7F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="SELECTASTUDENTtitle" layoutX="231.0" layoutY="83.0" prefHeight="23.0" prefWidth="239.0" text="Estudiante a" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane blendMode="SOFT_LIGHT" layoutX="715.0" prefHeight="400.0" prefWidth="28.0" style="-fx-background-color: #a7d2db;" />
+      <Pane fx:id="SELECTASTUDENTsearchPane" layoutX="736.0" prefHeight="400.0" prefWidth="564.0" style="-fx-background-color: #a7d2db;" visible="false">
+         <children>
+            <TableView fx:id="SELECTASTUDENTtvStudent" layoutX="30.0" layoutY="120.0" prefHeight="80.0" prefWidth="504.0">
+              <columns>
+                <TableColumn fx:id="SELECTASTUDENTtcFullName" prefWidth="333.0" text="Nombre completo" />
+                <TableColumn fx:id="SELECTASTUDENTtcId" prefWidth="90.0" text="Identificación" />
+                  <TableColumn fx:id="SELECTASTUDENTtcCourse" text="Grado" />
+              </columns>
+            </TableView>
+            <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="203.0" layoutY="277.0" mnemonicParsing="false" onAction="#SELECTASTUDENTaccept" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Aceptar" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/done.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="SELECTASTUDENTtxtId" layoutX="260.0" layoutY="157.0" prefHeight="25.0" prefWidth="179.0" promptText="Identificación (números)">
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font>
+      </TextField>
+      <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="271.0" layoutY="274.0" mnemonicParsing="false" onAction="#SELECTASTUDENTsearch" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Buscar" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane fx:id="SELECTASTUDENTbasicPane" layoutX="729.0" prefHeight="400.0" prefWidth="573.0" style="-fx-background-color: #a7d2db;">
+         <children>
+            <ImageView fitHeight="277.0" fitWidth="350.0" layoutX="160.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Student.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="10.0" layoutX="25.0" layoutY="340.0" mnemonicParsing="false" onAction="#SELECTASTUDENTback" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #46DCFF; -fx-background-radius: 60;" text="Volver" textFill="WHITE">
+         <font>
+            <Font name="Times New Roman Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/c:/Users/Kennet/OneDrive%20-%20Universidad%20Icesi%20(@icesi.edu.co)/Universidad/Programas%20extra/jfx-school-manager/jfx-school-manager/icons/Back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</Pane>

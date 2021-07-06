@@ -1,5 +1,12 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Manager {
@@ -18,18 +25,36 @@ public class Manager {
     private final static Courses LAST_ELEMENTARY_COURSE = Courses.values()[LAST_ELEMENTARY_COURSE_INDEX];
 
     //This variables are the negation/afirmation in spanish.
-    private final static String NEGATION ="No";
     private final static String AFFIRMATION ="Sí";
+
+    //Serialization file path.
+    private final static String filePath = "data/students.txt";
 
     ArrayList<Student> allStudents;       
     ArrayList<ExtraAsignatures> testAsignatures = new ArrayList<ExtraAsignatures>();
 
     public Manager(){
-        allStudents = new ArrayList<Student>();
-        testAsignatures.add(ExtraAsignatures.DANZA);
-        addStudent("Jhon", "Doe", Courses.ONCE, NEGATION, NEGATION, "000000", testAsignatures);      
+        allStudents = new ArrayList<Student>();    
     }
 
+
+    public void saveData() throws FileNotFoundException, IOException{
+        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(filePath));
+        os.writeObject(allStudents);
+        os.close();  
+    }
+
+    @SuppressWarnings({ "unchecked"})
+    public void loadData() throws FileNotFoundException, IOException, ClassNotFoundException{
+        File f = new File(filePath);
+        if(f.exists()){
+            ObjectInputStream is = new ObjectInputStream(new FileInputStream(f));
+            allStudents = (ArrayList<Student>) is.readObject();
+            is.close();   
+        }
+       
+        
+    }
 
     private float calculateCost(Courses course, ArrayList<ExtraAsignatures> extraAsignatures, String hasTerapy, String hasRelatives){
         float cost = 0;
@@ -67,7 +92,7 @@ public class Manager {
 
     public void addStudent(String name, String lastName, Courses course, String hasRelatives, String terapy, String id, ArrayList<ExtraAsignatures> asignatures){
         float cost = calculateCost(course, asignatures, terapy, hasRelatives);
-        StudentBasic newStudent = new StudentBasic(name, lastName, course, hasRelatives, cost, terapy, id, asignatures);
+        Student newStudent = new Student(name, lastName, course, hasRelatives, cost, terapy, id, asignatures);
         allStudents.add(newStudent);
     }
 

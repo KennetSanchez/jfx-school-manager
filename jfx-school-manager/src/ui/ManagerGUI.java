@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Courses;
 import model.ExtraAsignatures;
 import model.Manager;
@@ -618,7 +621,35 @@ public class ManagerGUI {
         alert.show();
         showStudentsList();
     }
+
     //-----------------------------------------------------------------  SHOW WINDOWS -----------------------------------------------------------------
+
+    public void start() throws FileNotFoundException, ClassNotFoundException, IOException{
+        mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    manager.saveData();
+                } catch (IOException e) {
+                    
+                }
+            }
+        });
+        popUpStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    manager.saveData();
+                } catch (IOException e) {
+                    
+                }
+            }
+        });
+        
+        manager.loadData();
+    }
 
     private void showSearchedStudent(Student foundedStudents) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchedStudent.fxml"));
@@ -714,17 +745,10 @@ public class ManagerGUI {
             asignaturesArray.add(asignature);
         }
         
-        if(asignaturesArray.size() != 0){
-            ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
-            ADDSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
-            ADDSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
-        }else{
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText("Ningun elemento fue elegido");
-            alert.setContentText("Intente nuevamente");
-            alert.show();
-        }
+        ObservableList<ExtraAsignatures> asignaturesOb = FXCollections.observableArrayList(asignaturesArray);
+        ADDSTUDENTtvChoosedSignatures.setItems(asignaturesOb);
+        ADDSTUDENTtcChoosedSignatures.setCellValueFactory(new PropertyValueFactory<ExtraAsignatures, String>("name"));
+        
     }
 
     private void showEditStudent() throws IOException{

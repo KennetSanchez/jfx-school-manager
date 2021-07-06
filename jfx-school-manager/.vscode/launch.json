@@ -1,6 +1,7 @@
 { 
     "version": "0.2.0", 
     "configurations": [
+        
         {
             "type": "java",
             "name": "Debug (Launch) - Current File",
@@ -11,7 +12,7 @@
             "type": "java",
             "name": "Debug (Launch)-MainLaunch Main<jfx-school-manager_7daa359d>",
             "request": "launch",
-            "vmArgs": "--module-path C:/Users/Kennet/Downloads/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path C:/Users/Kennet/Downloads/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml,javafx.swing,javafx.graphics,javafx.media,javafx.web,javafx.swt,javafx.base",          
             "mainClass": "ui.Main",
             "projectName": "jfx-school-manager_7daa359d"
         }
